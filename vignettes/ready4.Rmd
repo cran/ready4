@@ -1,0 +1,41 @@
+---
+title: "ready4"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ready4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, results='hide', message=FALSE, warning=F}
+library(ready4)
+```
+
+## Motivation
+The social, economic and service systems that shape population health are complex and thus can be challenging to model. Some health economic modelling projects may therefore be more tractable if broken into smaller tasks and advanced by multiple teams. Such phased and collaborative approaches can be facilitated by use of common frameworks for the development of computational models that are both open and modular. A broader discussion of the ethical dimensions of these topics is available [here](https://arxiv.org/pdf/2403.17798.pdf).
+
+## Implementation
+The `ready4` package provides bare bones foundational elements of a software framework to implement replicable and transferable health economic models in R. The framework is extended by multiple other R packages - see the framework's [consolidated documentation website](https://www.ready4-dev.com/) for details. 
+
+### Articles
+The `ready4` package includes a simple programming syntax, a template model module  and functions to partially automate the maintenance of a modelling project's website. These tools are described in the following articles:
+
+- [Implement Modular Computational Health Economic Models](V_01.html)
+
+- [Use A Simple And Consistent Syntax In Computational Health Economic Models](V_02.html)
+
+- [Finding Ready4 Module Libraries](V_04.html)
+
+- [Finding Examples of Individual Ready4 Modules and Sub-modules](V_05.html)
+
+A discussion of why ready4 has adopted an object-oriented approach to model modularisation is included in the following article:
+
+- [Apply An Object-Oriented Paradigm To Computational Health Economic Models](V_03.html)
+

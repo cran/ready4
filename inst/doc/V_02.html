@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Use A Simple And Consistent Syntax In Computational Health Economic Models</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Use A Simple And Consistent Syntax In
+Computational Health Economic Models</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ready4) </span></code></pre></div>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>Transparency is one of the underpinning principles of ethical
+modelling practice. One way to improve the transparency of computational
+health economic models (such as those we are developing <a href="https://readyforwhatsnext.org">in youth mental health</a>) is to
+ensure that the <a href="https://readyforwhatsnext.org/docs/model/analyses/">programs
+implementing model analyses</a> can be meaningfully inspected by readers
+with different levels of technical expertise. Even non-technical readers
+should be able to follow the high-level logic implemented by model
+algorithms. If multiple analysis programs are written using a common
+simplified syntax then reviewers of those programs need to contend with
+relatively fewer new concepts.</p>
+</div>
+<div id="implementation" class="section level2">
+<h2>Implementation</h2>
+<p><code>ready4</code> provides a simple syntax that can be consistently
+applied to attach algorithms (methods) to <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/">model
+modules</a>. It does so by taking advantage of the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/#transparent-computational-models">abstraction
+and polymorphism features of Object Oriented Programing</a> and R’s use
+of generic functions. Generic functions don’t implement algorithms
+themselves - their most salient features are a name and a high level
+description of the type of task that any method associated with that
+generic should perform. Whenever a developer creates a method for <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation">classes
+that use R’s S4 and S3 systems (the types used for model modules and
+sub-modules)</a>, they can associate that method with the generic that
+has a description that is the best match for the algorithm being
+implemented.</p>
+<div id="available-generics" class="section level3">
+<h3>Available generics</h3>
+<p>A table that summarises the latest <code>ready4</code> syntax can be
+ingested from a periodically updated database using
+<code>get_methods_tb</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">get_methods_tb</span>()</span></code></pre></div>
+<div id="core-generics" class="section level4">
+<h4>Core generics</h4>
+<p><code>ready4</code> includes a number of core generic functions which
+describe the main types of method to be implemented by model modules.
+Notably, the <code>ready4</code> package does not associate methods with
+any of these core generics. Instead, methods are associated with these
+generics in <a href="https://readyforwhatsnext.org/docs/tutorials/finding/libraries/">R
+packages of model modules</a>. A HTML table of <code>ready4</code>’s
+core generics and examples of methods associated with each generic can
+be displayed using the <code>print_methods</code> function, using the
+<code>return_1L_chr = &quot;core&quot;</code> argument.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;core&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>) </span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Method
+</th>
+<th style="text-align:left;">
+Purpose
+</th>
+<th style="text-align:left;">
+Examples
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/author-methods.html">
+author </a>
+</td>
+<td style="text-align:left;">
+Author and save files
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     ">5</a>
+,
+<a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     ">6</a>,
+<a href="https://ready4-dev.github.io/ready4pack/articles/V_01.html" style="     ">7</a>
+,
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/characterize-methods.html">
+characterize </a>
+</td>
+<td style="text-align:left;">
+Characterize model module data by generating (tabular) descriptive
+statistics
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/depict-methods.html">
+depict </a>
+</td>
+<td style="text-align:left;">
+Depict (plot) features of model module data
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">13</a>,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">15</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/enhance-methods.html">
+enhance </a>
+</td>
+<td style="text-align:left;">
+Enhance a model module by adding new elements
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/exhibit-methods.html">
+exhibit </a>
+</td>
+<td style="text-align:left;">
+Exhibit features of model module data by printing them to the R console
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     ">2</a>
+,
+<a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     ">5</a>
+,
+<a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     ">6</a>,
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">13</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">15</a>
+,
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+,
+<a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     ">18</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">19</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/ingest-methods.html">
+ingest </a>
+</td>
+<td style="text-align:left;">
+Ingest data
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     ">1</a>
+,
+<a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     ">2</a>
+,
+<a href="https://ready4-dev.github.io/ready4use/articles/V_03.html" style="     ">3</a>
+,
+<a href="https://ready4-dev.github.io/ready4class/articles/V_01.html" style="     ">6</a>,
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">13</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">15</a>
+,
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+,
+<a href="https://ready4-dev.github.io/youthu/articles/V_01.html" style="     ">18</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/investigate-methods.html">
+investigate </a>
+</td>
+<td style="text-align:left;">
+Investigate solutions to an inverse problem
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/manufacture-methods.html">
+manufacture </a>
+</td>
+<td style="text-align:left;">
+Manufacture a new object
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/metamorphose-methods.html">
+metamorphose </a>
+</td>
+<td style="text-align:left;">
+Metamorphose a model module to a model module of a different
+(non-inheriting) class
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/procure-methods.html">
+procure </a>
+</td>
+<td style="text-align:left;">
+Procure items from a dataset
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4fun/articles/V_01.html" style="     ">5</a>,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/prognosticate-methods.html">
+prognosticate </a>
+</td>
+<td style="text-align:left;">
+Prognosticate (make predictions) by solving a forward problem
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/ratify-methods.html">
+ratify </a>
+</td>
+<td style="text-align:left;">
+Ratify that input or output data meet validity criteria
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">13</a>,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">19</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/reckon-methods.html">
+reckon </a>
+</td>
+<td style="text-align:left;">
+Reckon (calculate) a value
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/renew-methods.html">
+renew </a>
+</td>
+<td style="text-align:left;">
+Renew (update) values
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     ">1</a>
+,
+<a href="https://ready4-dev.github.io/ready4use/articles/V_02.html" style="     ">2</a>
+,
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">13</a>,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">15</a>
+,
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">19</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/share-methods.html">
+share </a>
+</td>
+<td style="text-align:left;">
+Share data via an online repository
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4use/articles/V_01.html" style="     ">1</a>
+,
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">13</a>,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">15</a>
+,
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="slot-generics-and-methods" class="section level4">
+<h4>Slot generics and methods</h4>
+<p>Each of the “core” generics also has a “slot” version, for use when
+applying a core method to a specified slot of a class. The
+<code>ready4</code> package associated methods for each of these “slot”
+generics for <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation">the
+<code>Ready4Module</code> template</a>. Two of these “slot” methods can
+also be used for additional purposes:</p>
+<ul>
+<li><p><a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html">procureSlot</a>
+is a “getter” method - its default behaviour is to return the value of a
+specified slot. If the argument <code>use_procure_mthd_1L_lgl = T</code>
+is included in the method call, <code>procureSlot</code> will instead
+apply the <code>procure</code> method to a specified slot.</p></li>
+<li><p><a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html">renewSlot</a>
+is a “setter” method - if any value other than “use_renew_mthd” (the
+default) is passed to the <code>new_val_xx</code> argument, that value
+will be assigned to the specified slot.</p></li>
+</ul>
+<p>A HTML table of the slot generics bundled with <code>ready4</code>
+can be displayed using the <code>print_methods</code> function, using
+the <code>return_1L_chr = &quot;slot&quot;</code> argument.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;slot&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Method
+</th>
+<th style="text-align:left;">
+Purpose
+</th>
+<th style="text-align:left;">
+Examples
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/authorSlot-methods.html">
+authorSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the author method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/characterizeSlot-methods.html">
+characterizeSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the characterize method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/depictSlot-methods.html">
+depictSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the depict method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/enhanceSlot-methods.html">
+enhanceSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the enhance method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/exhibitSlot-methods.html">
+exhibitSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the exhibit method to a model module slot
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     ">4</a>,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">19</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/ingestSlot-methods.html">
+ingestSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the ingest method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/investigateSlot-methods.html">
+investigateSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the investigate method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/manufactureSlot-methods.html">
+manufactureSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the manufacture method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/metamorphoseSlot-methods.html">
+metamorphoseSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the metamorphose method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html">
+procureSlot </a>
+</td>
+<td style="text-align:left;">
+Procure (get) data from a slot
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     ">4</a>,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">16</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/prognosticateSlot-methods.html">
+prognosticateSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the prognosticate method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/ratifySlot-methods.html">
+ratifySlot </a>
+</td>
+<td style="text-align:left;">
+Apply the ratify method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/reckonSlot-methods.html">
+reckonSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the reckon method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/renewSlot-methods.html">
+renewSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the renew method to a model module slot
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     ">4</a>,
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">14</a>
+,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">19</a>
+,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">20</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/shareSlot-methods.html">
+shareSlot </a>
+</td>
+<td style="text-align:left;">
+Apply the share method to a model module slot
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="extended-author-generics" class="section level4">
+<h4>Extended <code>author</code> generics</h4>
+<p>Finally, there are a small number of other generics that are more
+general extensions of the core functions. Currently, these extended
+generics are all variants on the <code>author</code> generics, with each
+one specifying the type of output to be authored by the method. The
+<code>ready4</code> package does not include methods for any of these
+extended generics. A HTML table of the extended generics bundled with
+<code>ready4</code> can be displayed using the
+<code>print_methods</code> function, using the
+<code>return_1L_chr = &quot;extended&quot;</code> argument.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>              <span class="at">exclude_mthds_for_chr =</span> <span class="st">&quot;Ready4Module&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;extended&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Method
+</th>
+<th style="text-align:left;">
+Purpose
+</th>
+<th style="text-align:left;">
+Examples
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/authorClasses-methods.html">
+authorClasses </a>
+</td>
+<td style="text-align:left;">
+Author and document classes
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/authorData-methods.html">
+authorData </a>
+</td>
+<td style="text-align:left;">
+Author and document datasets
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     ">4</a>,
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">17</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/authorFunctions-methods.html">
+authorFunctions </a>
+</td>
+<td style="text-align:left;">
+Author and document functions
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4/reference/authorReport-methods.html">
+authorReport </a>
+</td>
+<td style="text-align:left;">
+Author and save a report
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     ">4</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

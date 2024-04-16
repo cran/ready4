@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Finding Applied Examples of Ready4 Modules and Sub-modules</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Finding Applied Examples of Ready4 Modules
+and Sub-modules</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ready4)</span></code></pre></div>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>When considering whether to use model modules, model developers and
+users will often want to see examples of each module’s application The
+<code>ready4</code> package includes tools to allow a modelling
+project’s maintainers to perform automated searches for vignette
+examples of model modules and to output tabular summaries of these
+modules that are suitable for inclusion on documentation website
+pages.</p>
+</div>
+<div id="implementation" class="section level2">
+<h2>Implementation</h2>
+<p>Details of how to search for themed collections of modules is
+described in <a href="https://readyforwhatsnext.org/docs/tutorials/finding/libraries/">another
+article</a>. A table itemising individual model modules and sub-modules
+authored with <code>ready4</code> can be generated using
+<code>make_modules_tb</code>. This function scrapes relevant data from
+the websites of module libraries that have been developed within a
+specified project’s GitHub organisation and may take a couple of minutes
+to execute. In this example, we are going to examine modules from a <a href="https://readyforwhatsnext.org/">youth mental health model</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>modules_tb <span class="ot">&lt;-</span>  <span class="fu">make_modules_tb</span>(<span class="at">gh_repo_1L_chr =</span> <span class="st">&quot;ready4-dev/ready4&quot;</span>)</span></code></pre></div>
+<p>A slightly quicker method to achieve a similar result is to use the
+<code>get_modules_tb</code> function. This function retrieves an
+archived version (and therefore potentially less up to date) of the
+modules summary table.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Not run</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># modules_tb &lt;- get_modules_tb(gh_repo_1L_chr = &quot;ready4-dev/ready4&quot;)</span></span></code></pre></div>
+<p>The <code>modules_tb</code> object itemises both ready4 modules
+(which always use R’s “S4” class type) and sub-modules (“S3” class
+type). To display a HTML summary of just ready4 modules, you can use the
+<code>print_modules</code> function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_modules</span>(modules_tb, <span class="at">what_1L_chr =</span> <span class="st">&quot;S4&quot;</span>)</span></code></pre></div>
+<table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Class
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Examples
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/aus/reference/AusACT-class.html" style="     ">AusACT</a>
+</td>
+<td style="text-align:left;">
+Meta data for processing ACT population projections
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/aus/reference/AusHeadspace-class.html" style="     ">AusHeadspace</a>
+</td>
+<td style="text-align:left;">
+Meta data for constructing Headspace Centre geometries
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/aus/reference/AusLookup-class.html" style="     ">AusLookup</a>
+</td>
+<td style="text-align:left;">
+Lookup tables for Australian geometry and spatial attribute data
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/aus/reference/AusOrygen-class.html" style="     ">AusOrygen</a>
+</td>
+<td style="text-align:left;">
+Meta data for constructing OYH Specialist Mental Health Catchment
+geometries
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/aus/reference/AusProjections-class.html" style="     ">AusProjections</a>
+</td>
+<td style="text-align:left;">
+Meta data for constructing custom Australian population projections
+boundary
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/aus/reference/AusTasmania-class.html" style="     ">AusTasmania</a>
+</td>
+<td style="text-align:left;">
+Meta data for processing Tasmanian population projections
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/reference/CostlyCorrespondences-class.html" style="     ">CostlyCorrespondences</a>
+</td>
+<td style="text-align:left;">
+Collection of input, standards definition and results datasets for
+projects to generate standardised costing datasets
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/reference/CostlyCountries-class.html" style="     ">CostlyCountries</a>
+</td>
+<td style="text-align:left;">
+Collection of input, standards definition and results datasets for
+projects to generate standardised country data for use in costing
+datasets
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/reference/CostlyCurrencies-class.html" style="     ">CostlyCurrencies</a>
+</td>
+<td style="text-align:left;">
+Collection of input, standards definition and results datasets for
+projects to generate standardised currency data for use in costing
+datasets
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/reference/CostlySeed-class.html" style="     ">CostlySeed</a>
+</td>
+<td style="text-align:left;">
+Original (non-standardised) dataset (and metadata)
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/reference/CostlySource-class.html" style="     ">CostlySource</a>
+</td>
+<td style="text-align:left;">
+Input dataset (and metadata) for generating standardised costing
+datasets
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/reference/CostlyStandards-class.html" style="     ">CostlyStandards</a>
+</td>
+<td style="text-align:left;">
+Dataset (and metadata) defining the allowable values of specified
+variables
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/costly/articles/V_01.html" style="     ">1</a>,
+<a href="https://ready4-dev.github.io/costly/articles/V_02.html" style="     ">2</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/reference/ScorzAqol6-class.html" style="     ">ScorzAqol6</a>
+</td>
+<td style="text-align:left;">
+A dataset and metadata to support implementation of an AQoL-6D scoring
+algorithm
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/reference/ScorzAqol6Adol-class.html" style="     ">ScorzAqol6Adol</a>
+</td>
+<td style="text-align:left;">
+A dataset and metadata to support implementation of a scoring algorithm
+for the adolescent version of AQoL-6D
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/articles/V_01.html" style="     ">3</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/reference/ScorzAqol6Adult-class.html" style="     ">ScorzAqol6Adult</a>
+</td>
+<td style="text-align:left;">
+A dataset and metadata to support implementation of a scoring algorithm
+for the adult version of AQoL-6D
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/reference/ScorzEuroQol5-class.html" style="     ">ScorzEuroQol5</a>
+</td>
+<td style="text-align:left;">
+A dataset and metadata to support implementation of an EQ-5D scoring
+algorithm
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/articles/V_02.html" style="     ">4</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/scorz/reference/ScorzProfile-class.html" style="     ">ScorzProfile</a>
+</td>
+<td style="text-align:left;">
+A dataset to be scored, its associated metadata and details of the
+scoring instrument
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificConverter-class.html" style="     ">SpecificConverter</a>
+</td>
+<td style="text-align:left;">
+Container for seed objects used for creating SpecificModels modules
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/articles/V_01.html" style="     ">5</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificFixed-class.html" style="     ">SpecificFixed</a>
+</td>
+<td style="text-align:left;">
+Modelling project dataset, input parameters and complete fixed models
+results
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificInitiator-class.html" style="     ">SpecificInitiator</a>
+</td>
+<td style="text-align:left;">
+Modelling project dataset, input parameters and empty results
+placeholder
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificMixed-class.html" style="     ">SpecificMixed</a>
+</td>
+<td style="text-align:left;">
+Modelling project dataset, input parameters and complete mixed models
+results
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificModels-class.html" style="     ">SpecificModels</a>
+</td>
+<td style="text-align:left;">
+Modelling project dataset, input parameters and model comparison results
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificParameters-class.html" style="     ">SpecificParameters</a>
+</td>
+<td style="text-align:left;">
+Input parameters that specify candidate models to be explored
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificPredictors-class.html" style="     ">SpecificPredictors</a>
+</td>
+<td style="text-align:left;">
+Modelling project dataset, input parameters and predictor comparison
+results
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificPrivate-class.html" style="     ">SpecificPrivate</a>
+</td>
+<td style="text-align:left;">
+Analysis outputs not intended for public dissemination
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificProject-class.html" style="     ">SpecificProject</a>
+</td>
+<td style="text-align:left;">
+Modelling project dataset, parameters and results
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificResults-class.html" style="     ">SpecificResults</a>
+</td>
+<td style="text-align:left;">
+Analysis results
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificShareable-class.html" style="     ">SpecificShareable</a>
+</td>
+<td style="text-align:left;">
+Analysis outputs intended for public dissemination
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/SpecificSynopsis-class.html" style="     ">SpecificSynopsis</a>
+</td>
+<td style="text-align:left;">
+Input, Output and Authorship Data For Generating Reports
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/TTU/reference/TTUProject-class.html" style="     ">TTUProject</a>
+</td>
+<td style="text-align:left;">
+Input And Output Data For Undertaking and Reporting Utility Mapping
+Studies
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/TTU/articles/V_01.html" style="     ">6</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/TTU/reference/TTUReports-class.html" style="     ">TTUReports</a>
+</td>
+<td style="text-align:left;">
+Metadata to produce utility mapping study reports
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/TTU/reference/TTUSynopsis-class.html" style="     ">TTUSynopsis</a>
+</td>
+<td style="text-align:left;">
+Input, Output and Authorship Data For Generating Utility Mapping Study
+Reports
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityArguments-class.html" style="     ">VicinityArguments</a>
+</td>
+<td style="text-align:left;">
+Function arguments for constructing a spatial object
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityLocal-class.html" style="     ">VicinityLocal</a>
+</td>
+<td style="text-align:left;">
+Object defining data to be saved in local directory
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityLocalProcessed-class.html" style="     ">VicinityLocalProcessed</a>
+</td>
+<td style="text-align:left;">
+Object defining data to be saved in local directory in a processed (R)
+format
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityLocalRaw-class.html" style="     ">VicinityLocalRaw</a>
+</td>
+<td style="text-align:left;">
+Object defining data to be saved in local directory in a raw
+(unprocessed) format
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityLookup-class.html" style="     ">VicinityLookup</a>
+</td>
+<td style="text-align:left;">
+Look up tables for spatiotemporal data
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityMacro-class.html" style="     ">VicinityMacro</a>
+</td>
+<td style="text-align:left;">
+Macro level context
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityMesoArea-class.html" style="     ">VicinityMesoArea</a>
+</td>
+<td style="text-align:left;">
+Meso level context - area
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityMesoRegion-class.html" style="     ">VicinityMesoRegion</a>
+</td>
+<td style="text-align:left;">
+Meso level context - region
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityMicro-class.html" style="     ">VicinityMicro</a>
+</td>
+<td style="text-align:left;">
+Micro level context
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinityProfile-class.html" style="     ">VicinityProfile</a>
+</td>
+<td style="text-align:left;">
+Information to create a profiled area object
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/VicinitySpaceTime-class.html" style="     ">VicinitySpaceTime</a>
+</td>
+<td style="text-align:left;">
+Spatiotemporal environment
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/YouthvarsDescriptives-class.html" style="     ">YouthvarsDescriptives</a>
+</td>
+<td style="text-align:left;">
+Metadata about descriptive statistics to be generated
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/YouthvarsProfile-class.html" style="     ">YouthvarsProfile</a>
+</td>
+<td style="text-align:left;">
+A dataset and its associated dictionary, descriptive statistics and
+metadata
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">8</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/YouthvarsSeries-class.html" style="     ">YouthvarsSeries</a>
+</td>
+<td style="text-align:left;">
+A longitudinal dataset and its associated dictionary, descriptive
+statistics and metadata
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_02.html" style="     ">8</a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>You can use the same function to display only ready4 sub-modules.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_modules</span>(modules_tb, <span class="at">what_1L_chr =</span> <span class="st">&quot;S3&quot;</span>)</span></code></pre></div>
+<table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Class
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Examples
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/specific_models.html" style="     ">specific_models</a>
+</td>
+<td style="text-align:left;">
+Candidate models lookup table
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/specific/reference/specific_predictors.html" style="     ">specific_predictors</a>
+</td>
+<td style="text-align:left;">
+Candidate predictors lookup table
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_abbreviations.html" style="     ">vicinity_abbreviations</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table for spatial data
+abbreviations
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_identifiers.html" style="     ">vicinity_identifiers</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table of unique feature
+identifiers used for different spatial objects
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_mapes.html" style="     ">vicinity_mapes</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object that stores spatial simulation
+parameters relating to Mean Absolute Prediction Errors
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_parameters.html" style="     ">vicinity_parameters</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object that stores simulation
+structural parameters relating to the spatial environment
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_points.html" style="     ">vicinity_points</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table of the longitude
+and latitude cordinates of sites of services / homes
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_processed.html" style="     ">vicinity_processed</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table of meta-data for
+spatial data packs (imported and pre-processed data)
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_raw.html" style="     ">vicinity_raw</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table of metadata about
+raw (un-processed) spatial data to import
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_resolutions.html" style="     ">vicinity_resolutions</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table of the relative
+resolutions of different spatial objects
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_templates.html" style="     ">vicinity_templates</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object lookup table for base file used
+in creation of certain spatial objects
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/vicinity/reference/vicinity_values.html" style="     ">vicinity_values</a>
+</td>
+<td style="text-align:left;">
+ready4 submodule class for tibble object that stores simulation
+parameter values for each iteration
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_aqol6d_adol.html" style="     ">youthvars_aqol6d_adol</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Assessment of Quality of Life
+Six Dimension Health Utility - Adolescent Version (AQoL6d Adolescent)
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_bads.html" style="     ">youthvars_bads</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Behavioural Activation for
+Depression Scale (BADS) scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_chu9d_adolaus.html" style="     ">youthvars_chu9d_adolaus</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Child Health Utility Nine
+Dimension Health Utility - Australian Adolescent Scoring (CHU-9D
+Australian Adolescent)
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_gad7.html" style="     ">youthvars_gad7</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Generalised Anxiety Disorder
+Scale (GAD-7) scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k10.html" style="     ">youthvars_k10</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Kessler Psychological
+Distress Scale (K10) - US Scoring System scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k10_aus.html" style="     ">youthvars_k10_aus</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Kessler Psychological
+Distress Scale (K10) - Australian Scoring System scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k6.html" style="     ">youthvars_k6</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Kessler Psychological
+Distress Scale (K6) - US Scoring System scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_k6_aus.html" style="     ">youthvars_k6_aus</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class)for Kessler Psychological Distress
+Scale (K6) - Australian Scoring System scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_oasis.html" style="     ">youthvars_oasis</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Overall Anxiety Severity and
+Impairment Scale (OASIS) scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_phq9.html" style="     ">youthvars_phq9</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Patient Health Questionnaire
+(PHQ-9) scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_scared.html" style="     ">youthvars_scared</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Screen for Child Anxiety
+Related Disorders (SCARED) scores
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/reference/youthvars_sofas.html" style="     ">youthvars_sofas</a>
+</td>
+<td style="text-align:left;">
+youthvars ready4 sub-module (S3 class) for Social and Occupational
+Functioning Assessment Scale (SOFAS)
+</td>
+<td style="text-align:left;">
+<a href="https://ready4-dev.github.io/youthvars/articles/V_01.html" style="     ">7</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
