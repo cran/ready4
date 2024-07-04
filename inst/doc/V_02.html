@@ -12,7 +12,7 @@
 
 
 
-<title>Use A Simple And Consistent Syntax In Computational Health Economic Models</title>
+<title>Apply Model Modules Using A Simple And Consistent Syntax</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -273,7 +273,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -560,59 +560,46 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">Use A Simple And Consistent Syntax In
-Computational Health Economic Models</h1>
+<h1 class="title toc-ignore">Apply Model Modules Using A Simple And
+Consistent Syntax</h1>
 
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ready4) </span></code></pre></div>
 <div id="motivation" class="section level2">
 <h2>Motivation</h2>
-<p>Transparency is one of the underpinning principles of ethical
-modelling practice. One way to improve the transparency of computational
-health economic models (such as those we are developing <a href="https://readyforwhatsnext.org">in youth mental health</a>) is to
-ensure that the <a href="https://readyforwhatsnext.org/docs/model/analyses/">programs
-implementing model analyses</a> can be meaningfully inspected by readers
-with different levels of technical expertise. Even non-technical readers
-should be able to follow the high-level logic implemented by model
-algorithms. If multiple analysis programs are written using a common
-simplified syntax then reviewers of those programs need to contend with
-relatively fewer new concepts.</p>
+<p>To be used in health economic analyses, model modules need to be
+called using a programming syntax. Ideally that syntax should be
+relatively simple, with the name and description of each command
+reliably communicating the category of operations it performs.</p>
 </div>
 <div id="implementation" class="section level2">
 <h2>Implementation</h2>
-<p><code>ready4</code> provides a simple syntax that can be consistently
-applied to attach algorithms (methods) to <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/">model
-modules</a>. It does so by taking advantage of the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/#transparent-computational-models">abstraction
-and polymorphism features of Object Oriented Programing</a> and R’s use
-of generic functions. Generic functions don’t implement algorithms
-themselves - their most salient features are a name and a high level
-description of the type of task that any method associated with that
-generic should perform. Whenever a developer creates a method for <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation">classes
-that use R’s S4 and S3 systems (the types used for model modules and
-sub-modules)</a>, they can associate that method with the generic that
-has a description that is the best match for the algorithm being
-implemented.</p>
-<div id="available-generics" class="section level3">
-<h3>Available generics</h3>
-<p>A table that summarises the latest <code>ready4</code> syntax can be
-ingested from a periodically updated database using
-<code>get_methods_tb</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">get_methods_tb</span>()</span></code></pre></div>
-<div id="core-generics" class="section level4">
-<h4>Core generics</h4>
-<p><code>ready4</code> includes a number of core generic functions which
-describe the main types of method to be implemented by model modules.
-Notably, the <code>ready4</code> package does not associate methods with
-any of these core generics. Instead, methods are associated with these
-generics in <a href="https://readyforwhatsnext.org/docs/tutorials/finding/libraries/">R
-packages of model modules</a>. A HTML table of <code>ready4</code>’s
-core generics and examples of methods associated with each generic can
-be displayed using the <code>print_methods</code> function, using the
+<p><code>ready4</code> provides a simple syntax that is used by all
+model modules developed with the <a href="https://www.ready4-dev.com/"><code>ready4</code>
+framework</a>.</p>
+</div>
+<div id="use" class="section level2">
+<h2>Use</h2>
+<p>A table that itemises <code>ready4</code> commands along with
+examples of how these commands are used can be ingested from a
+periodically updated database using <code>get_methods_tb</code>. In the
+below example we will search for examples of where that syntax has been
+used by modules from the <a href="https://readyforwhatsnext.org/">readyforwhatsnext model</a>. The
+value supplied to the <code>gh_repo_1L_chr</code> argument specifies the
+repository in which a dataset of readyforwhatsnext module libraries is
+stored.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">get_methods_tb</span>(<span class="at">gh_repo_1L_chr =</span> <span class="st">&quot;ready4-dev/ready4&quot;</span>)</span></code></pre></div>
+<pre><code>## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</code></pre>
+<div id="core-commands" class="section level3">
+<h3>Core commands</h3>
+<p>A HTML table of <code>ready4</code>’s core commands and examples of
+the use of each command can be displayed using the
+<code>print_methods</code> function, using the
 <code>return_1L_chr = &quot;core&quot;</code> argument.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;core&quot;</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;core&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>) </span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -886,14 +873,11 @@ Share data via an online repository
 </table>
 </div>
 </div>
-<div id="slot-generics-and-methods" class="section level4">
-<h4>Slot generics and methods</h4>
-<p>Each of the “core” generics also has a “slot” version, for use when
-applying a core method to a specified slot of a class. The
-<code>ready4</code> package associated methods for each of these “slot”
-generics for <a href="https://www.ready4-dev.com/docs/framework/implementation/modularity/#implementation">the
-<code>Ready4Module</code> template</a>. Two of these “slot” methods can
-also be used for additional purposes:</p>
+<div id="applying-commands-to-module-slots" class="section level3">
+<h3>Applying commands to module “slots”</h3>
+<p>Each of the “core” commands also has a “slot” version, which applies
+the command to a specified slot (a named element of a module). Two of
+these “slot” methods can also be used for additional purposes:</p>
 <ul>
 <li><p><a href="https://ready4-dev.github.io/ready4/reference/procureSlot-methods.html">procureSlot</a>
 is a “getter” method - its default behaviour is to return the value of a
@@ -905,12 +889,12 @@ is a “setter” method - if any value other than “use_renew_mthd” (the
 default) is passed to the <code>new_val_xx</code> argument, that value
 will be assigned to the specified slot.</p></li>
 </ul>
-<p>A HTML table of the slot generics bundled with <code>ready4</code>
-can be displayed using the <code>print_methods</code> function, using
-the <code>return_1L_chr = &quot;slot&quot;</code> argument.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;slot&quot;</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<p>A HTML table of slot commands and relevant examples can be displayed
+using the <code>print_methods</code> function, using the
+<code>return_1L_chr = &quot;slot&quot;</code> argument.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;slot&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1088,7 +1072,7 @@ Apply the reckon method to a model module slot
 renewSlot </a>
 </td>
 <td style="text-align:left;">
-Apply the renew method to a model module slot
+Renew (set) the values of data in a module slot
 </td>
 <td style="text-align:left;">
 <a href="https://ready4-dev.github.io/ready4show/articles/V_01.html" style="     ">4</a>,
@@ -1116,21 +1100,19 @@ Apply the share method to a model module slot
 </table>
 </div>
 </div>
-<div id="extended-author-generics" class="section level4">
-<h4>Extended <code>author</code> generics</h4>
-<p>Finally, there are a small number of other generics that are more
-general extensions of the core functions. Currently, these extended
-generics are all variants on the <code>author</code> generics, with each
-one specifying the type of output to be authored by the method. The
-<code>ready4</code> package does not include methods for any of these
-extended generics. A HTML table of the extended generics bundled with
-<code>ready4</code> can be displayed using the
-<code>print_methods</code> function, using the
+<div id="extended-commands" class="section level3">
+<h3>Extended commands</h3>
+<p>Finally, there are a small number of other commands that are more
+general extensions of the core commands. Currently, these extended
+commands are all variants on the <code>author</code> command, with each
+extension specifying the type of output to be authored by the method. A
+HTML table of the extended generics bundled with <code>ready4</code> can
+be displayed using the <code>print_methods</code> function, using the
 <code>return_1L_chr = &quot;extended&quot;</code> argument.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>              <span class="at">exclude_mthds_for_chr =</span> <span class="st">&quot;Ready4Module&quot;</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;extended&quot;</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>              <span class="at">exclude_mthds_for_chr =</span> <span class="st">&quot;Ready4Module&quot;</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;extended&quot;</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1196,7 +1178,6 @@ Author and save a report
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
 </div>

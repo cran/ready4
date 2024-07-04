@@ -49,7 +49,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -343,44 +343,72 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ready4)</span></code></pre></div>
 <div id="motivation" class="section level2">
 <h2>Motivation</h2>
-<p>The social, economic and service systems that shape population health
-are complex and thus can be challenging to model. Some health economic
-modelling projects may therefore be more tractable if broken into
-smaller tasks and advanced by multiple teams. Such phased and
-collaborative approaches can be facilitated by use of common frameworks
-for the development of computational models that are both open and
-modular. A broader discussion of the ethical dimensions of these topics
-is available <a href="https://arxiv.org/pdf/2403.17798.pdf">here</a>.</p>
+<p>Health economic models should ideally be both “living” (kept up to
+date) and “transferable” (easy to selectively modify for use in a new
+context) and applied in research that is reproducible. These goals <a href="https://www.ready4-dev.com/docs/getting-started/motivation/">can
+be hard to achieve in practice</a>.</p>
 </div>
 <div id="implementation" class="section level2">
 <h2>Implementation</h2>
-<p>The <code>ready4</code> package provides bare bones foundational
-elements of a software framework to implement replicable and
-transferable health economic models in R. The framework is extended by
-multiple other R packages - see the framework’s <a href="https://www.ready4-dev.com/">consolidated documentation
-website</a> for details.</p>
-<div id="articles" class="section level3">
-<h3>Articles</h3>
-<p>The <code>ready4</code> package includes a simple programming syntax,
-a template model module and functions to partially automate the
-maintenance of a modelling project’s website. These tools are described
-in the following articles:</p>
-<ul>
-<li><p><a href="V_01.html">Implement Modular Computational Health
-Economic Models</a></p></li>
-<li><p><a href="V_02.html">Use A Simple And Consistent Syntax In
-Computational Health Economic Models</a></p></li>
-<li><p><a href="V_04.html">Finding Ready4 Module Libraries</a></p></li>
-<li><p><a href="V_05.html">Finding Examples of Individual Ready4 Modules
-and Sub-modules</a></p></li>
-</ul>
-<p>A discussion of why ready4 has adopted an object-oriented approach to
-model modularisation is included in the following article:</p>
-<ul>
-<li><a href="V_03.html">Apply An Object-Oriented Paradigm To
-Computational Health Economic Models</a></li>
-</ul>
+<p>The <code>ready4</code> R library provides bare bones foundational
+elements of a <a href="https://link.springer.com/article/10.1007/s40273-024-01378-8">prototype
+software framework</a> to: (i) develop living and transferable health
+economic models; and (ii) apply those models to implement reproducible
+health economic analyses. The framework is extended by multiple other R
+packages - see the framework’s <a href="https://www.ready4-dev.com/">project website</a> for details.</p>
 </div>
+<div id="use" class="section level2">
+<h2>Use</h2>
+<p>For most users, the main applications of the ready4 library will be
+to:</p>
+<ul>
+<li><p><a href="V_04.html">find themed collections of health economic
+model modules that have been developed with the ready4
+framework</a>;</p></li>
+<li><p><a href="V_05.html">itemise available model modules and
+sub-modules and find examples of how to use them</a>; and</p></li>
+<li><p><a href="V_02.html">apply these modules to undertake health
+economic analyses using a simple and consistent syntax</a>.</p></li>
+</ul>
+<p>For the above purposes, the ready4 library will be typically used in
+conjunction with the <a href="https://ready4-dev.github.io/ready4use/">ready4use</a> and <a href="https://ready4-dev.github.io/ready4show/">ready4show</a>
+libraries.</p>
+<p>For users with software development expertise, the ready4 library
+also provides:</p>
+<ul>
+<li><p><a href="V_01.html">a template model module</a> that facilitates
+modular implementations of health economic models using an <a href="V_03.html">object-oriented paradigm</a>;</p></li>
+<li><p><a href="V_07.html">a simple programming syntax to make available
+to end-users</a>; and</p></li>
+<li><p><a href="V_06.html">tools to partially automate the maintenance
+of an open source modelling project’s website</a>.</p></li>
+</ul>
+<p>Developers that wish to author health economic models as R libraries
+with ready4 may wish to consider using the <a href="https://ready4-dev.github.io/ready4pack/">ready4pack</a> library.
+However, that library (along with its two primary dependencies <a href="https://ready4-dev.github.io/ready4fun/">ready4fun</a> and <a href="https://ready4-dev.github.io/ready4class/">ready4class</a>) is not
+yet well documented and the ready4 framework remains a prototype. It is
+therefore recommended to <a href="https://mph-economist.netlify.app/#contact">first contact the
+package authors</a> before undertaking R library development with
+ready4.</p>
+</div>
+<div id="further-reading" class="section level2">
+<h2>Further reading</h2>
+<ul>
+<li><p>A <a href="https://arxiv.org/pdf/2403.17798">pre-print
+manuscript</a> discussing the need for health economic models to be
+transparent, reusable and updatable;</p></li>
+<li><p>An 2024 <a href="https://link.springer.com/article/10.1007/s40273-024-01378-8">article
+in Pharmacoeconomics</a> describing the ready4 prototype software
+framework;</p></li>
+<li><p>The <a href="https://www.ready4-dev.com/">ready4 prototype
+software framework website</a>;</p></li>
+<li><p>The <a href="https://readyforwhatsnext.org/">project website of
+the readyforwhatsnext model</a> that is being developed with the ready4
+software framework; and</p></li>
+<li><p>A <a href="https://www.medrxiv.org/content/10.1101/2021.07.07.21260129v4">pre-print
+manuscript</a> describing a utility mapping study implemented with
+modules of the readyforwhatsnext model.</p></li>
+</ul>
 </div>
 
 

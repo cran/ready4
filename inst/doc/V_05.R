@@ -5,7 +5,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 library(ready4)
 
 ## -----------------------------------------------------------------------------
-modules_tb <-  make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
+modules_tb <- make_modules_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  # Not run

@@ -1,3 +1,18 @@
+# ready4 0.1.14
+This patch modifies the print_packages() function so that it can filter output by model "section".
+
+# ready4 0.1.13
+This patch updates one of the examples files so that its execution does not breach the CRAN recommended run time limit.
+
+# ready4 0.1.12
+This patch updates functions for printing HTML tables to return NULL values if supplied with NULL values instead of tibble objects.
+
+# ready4 0.1.11
+This patch introduces the get_gracefully() function to address a CRAN policy violation and to ensure that unsuccessful attempts at retrieving internet resources fail gracefully.
+
+# ready4 0.1.10
+This patch fixes a documentation error under which the description of many functions referred to the wrong function.
+
 # ready4 0.1.9
 This patch fixes a typo in a reference to an arXiv preprint contained in the DESCRIPTION file.
 

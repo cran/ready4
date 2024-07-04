@@ -4,12 +4,12 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 ## ----results='hide', message=FALSE, warning=F---------------------------------
 library(ready4) 
 
-## ----echo=FALSE---------------------------------------------------------------
-# Not run
-# x <- make_methods_tb()
+## ----echo=FALSE, eval=FALSE---------------------------------------------------
+#  # Not run
+#  # x <- make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 
 ## -----------------------------------------------------------------------------
-x <- get_methods_tb()
+x <- get_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 
 ## -----------------------------------------------------------------------------
 print_methods(x,

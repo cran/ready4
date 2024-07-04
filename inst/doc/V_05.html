@@ -273,7 +273,7 @@ overflow: visible;
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -568,36 +568,39 @@ and Sub-modules</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ready4)</span></code></pre></div>
 <div id="motivation" class="section level2">
 <h2>Motivation</h2>
-<p>When considering whether to use model modules, model developers and
-users will often want to see examples of each module’s application The
-<code>ready4</code> package includes tools to allow a modelling
-project’s maintainers to perform automated searches for vignette
-examples of model modules and to output tabular summaries of these
-modules that are suitable for inclusion on documentation website
-pages.</p>
+<p>When considering whether to use a model module, it is useful to first
+see tutorials about appropriate use of that module.</p>
 </div>
 <div id="implementation" class="section level2">
 <h2>Implementation</h2>
-<p>Details of how to search for themed collections of modules is
-described in <a href="https://readyforwhatsnext.org/docs/tutorials/finding/libraries/">another
-article</a>. A table itemising individual model modules and sub-modules
-authored with <code>ready4</code> can be generated using
+<p>A table itemising individual model modules and sub-modules authored
+with <code>ready4</code> can be generated using
 <code>make_modules_tb</code>. This function scrapes relevant data from
 the websites of module libraries that have been developed within a
-specified project’s GitHub organisation and may take a couple of minutes
-to execute. In this example, we are going to examine modules from a <a href="https://readyforwhatsnext.org/">youth mental health model</a>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>modules_tb <span class="ot">&lt;-</span>  <span class="fu">make_modules_tb</span>(<span class="at">gh_repo_1L_chr =</span> <span class="st">&quot;ready4-dev/ready4&quot;</span>)</span></code></pre></div>
+specified project’s GitHub organisation.</p>
+</div>
+<div id="use" class="section level2">
+<h2>Use</h2>
+<p>In this example, we are going to examine modules from the <a href="https://readyforwhatsnext.org/">readyforwhatsnext model</a>. The
+value supplied to the <code>gh_repo_1L_chr</code> argument specifies the
+repository in which a dataset of readyforwhatsnext module libraries is
+stored. Note, the following command may take a couple of minutes to
+execute.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>modules_tb <span class="ot">&lt;-</span> <span class="fu">make_modules_tb</span>(<span class="at">gh_repo_1L_chr =</span> <span class="st">&quot;ready4-dev/ready4&quot;</span>)</span></code></pre></div>
+<pre><code>## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.
+## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</code></pre>
 <p>A slightly quicker method to achieve a similar result is to use the
 <code>get_modules_tb</code> function. This function retrieves an
 archived version (and therefore potentially less up to date) of the
 modules summary table.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Not run</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># modules_tb &lt;- get_modules_tb(gh_repo_1L_chr = &quot;ready4-dev/ready4&quot;)</span></span></code></pre></div>
-<p>The <code>modules_tb</code> object itemises both ready4 modules
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Not run</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co"># modules_tb &lt;- get_modules_tb(gh_repo_1L_chr = &quot;ready4-dev/ready4&quot;)</span></span></code></pre></div>
+<p>The <code>modules_tb</code> object itemises both model <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/">modules
 (which always use R’s “S4” class type) and sub-modules (“S3” class
-type). To display a HTML summary of just ready4 modules, you can use the
+type)</a>.</p>
+<p>To display a HTML summary of just model modules, you can use the
 <code>print_modules</code> function.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_modules</span>(modules_tb, <span class="at">what_1L_chr =</span> <span class="st">&quot;S4&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_modules</span>(modules_tb, <span class="at">what_1L_chr =</span> <span class="st">&quot;S4&quot;</span>)</span></code></pre></div>
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1114,8 +1117,8 @@ statistics and metadata
 </tr>
 </tbody>
 </table>
-<p>You can use the same function to display only ready4 sub-modules.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_modules</span>(modules_tb, <span class="at">what_1L_chr =</span> <span class="st">&quot;S3&quot;</span>)</span></code></pre></div>
+<p>You can use the same function to display only model sub-modules.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">print_modules</span>(modules_tb, <span class="at">what_1L_chr =</span> <span class="st">&quot;S3&quot;</span>)</span></code></pre></div>
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1408,6 +1411,12 @@ Functioning Assessment Scale (SOFAS)
 </tr>
 </tbody>
 </table>
+</div>
+<div id="related-content" class="section level2">
+<h2>Related content</h2>
+<p>Details of how to search for themed collections of modules is
+described in <a href="https://www.ready4-dev.com/docs/tutorials/use-models/finding-modules/collections/">another
+article</a>.</p>
 </div>
 
 

@@ -12,7 +12,7 @@
 
 
 
-<title>Implement Modular Computational Health Economic Models</title>
+<title>Provide End Users With A Simple And Consistent Syntax</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -336,101 +336,63 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">Implement Modular Computational Health
-Economic Models</h1>
+<h1 class="title toc-ignore">Provide End Users With A Simple And
+Consistent Syntax</h1>
 
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(ready4) </span></code></pre></div>
 <div id="motivation" class="section level2">
 <h2>Motivation</h2>
-<p>A potentially attractive approach to modelling complex health systems
-is to begin with a relatively simple computational model and to
-progressively extend its scope and sophistication. Such an approach
-could be described as “modular” if it is possible to readily combine
-multiple discrete modelling projects (potentially developed by different
-modelling teams) that each independently describe distinct aspects of
-the system being modelled.</p>
+<p>Transparency is one of the underpinning principles of ethical
+modelling practice. One way to improve the transparency of computational
+health economic models is to ensure that the programs implementing model
+analyses can be meaningfully inspected by readers with different levels
+of technical expertise. Even non-technical readers should be able to
+follow the high-level logic implemented by model algorithms. If multiple
+analysis programs are written using a common simplified syntax then
+reviewers of those programs need to contend with relatively fewer new
+concepts.</p>
 </div>
 <div id="implementation" class="section level2">
 <h2>Implementation</h2>
-<p>The <code>ready4</code> facilitates modular model development by
-supplying a template module that enables model developers to avail of
-the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/">encapsulation
-and inheritance features of Object Oriented Programming (OOP)</a>. The
-<a href="https://www.ready4-dev.com/">ready4 framework</a> uses two of
-R’s systems for implementing OOP - S3 and S4. An in-depth explanation of
-R’s different class system is beyond the scope of this article, but is
-explored in <a href="https://adv-r.hadley.nz/oo.html">Hadley Wickham’s
-Advanced R handbook</a>. However, it is useful to know some very high
-level information about S3 and S4 classes:</p>
-<ul>
-<li><p>S4 classes are frequently said to be “formal”, “strict” or
-“rigorous”. The elements of an S4 class are called slots and the type of
-data that each slot is allowed to contain is specified in the class
-definition. An S4 class can be comprised of slots that contain different
-types of data (e.g. a slot that contains a character vector and another
-slot that contains tabular data).</p></li>
-<li><p>S3 classes are often described as “simple”, “informal” and
-“flexible”. S3 objects attach an attribute label to base type objects
-(e.g. a character vector, a data.frame, a list), which in turn is used
-to work out what methods should be applied to the class.</p></li>
-</ul>
+<p><code>ready4</code> provides a simple syntax that can be consistently
+applied to attach algorithms (methods) to <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/">model
+modules</a>. It does so by taking advantage of the <a href="https://www.ready4-dev.com/docs/framework/implementation/paradigm/object-oriented/#transparent-computational-models">abstraction
+and polymorphism features of Object Oriented Programming</a> and R’s use
+of generic functions. Generic functions don’t implement algorithms
+themselves - their most salient features are a name and a high level
+description of the type of task that any method associated with that
+generic should perform. Whenever a developer creates a method for
+classes that use R’s S4 and S3 systems <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/#implementation">(the
+types used for model modules and sub-modules)</a>, they can associate
+that method with a generic that has a description that is a good match
+for the algorithm being implemented.</p>
 </div>
 <div id="use" class="section level2">
 <h2>Use</h2>
-<div id="ready4-model-modules" class="section level3">
-<h3>ready4 Model Modules</h3>
-<p>As we use the term, a “model module” is comprised of both a
-data-structure (an S4 class) and the algorithms (or “methods”) that are
-associated with that data-structure. Model modules can be created from a
-template - the <code>ready4</code> package’s <code>Ready4Module</code>
-class.</p>
-<p>We can create an object (<code>X</code>) from the
-<code>Ready4Module</code> template using the following command.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">Ready4Module</span>()</span></code></pre></div>
-<p>However, if we inspect <code>X</code> we can see it is of limited use
-as it contains no data other than an empty element called
-<code>dissemination_1L_chr</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">str</span>(X)</span></code></pre></div>
-<pre><code>## Formal class &#39;Ready4Module&#39; [package &quot;ready4&quot;] with 1 slot
-##   ..@ dissemination_1L_chr: chr NA</code></pre>
-<p>The <code>Ready4Module</code> class is therefore not intended to be
-called directly. Instead, the purpose of <code>Ready4Module</code> is to
-be the parent class of other model modules. Prototype tools for
-authoring modules from this template are described <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/authoring-modules/">here</a>.</p>
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-<div class="card-header">
-<p><strong>ready4 Concept</strong></p>
-</div>
-<div class="card-body">
-<div id="module" class="section level4 card-title">
-<h4>Module</h4>
-</div>
-<p>An instance of <code>Ready4Module</code> (or classes that inherit
-from <code>Ready4Module</code>) and its associated methods.</p>
-</div>
-</div>
-</div>
-<div id="ready4-model-sub-modules" class="section level3">
-<h3>ready4 Model Sub-modules</h3>
-<p>In ready4, S3 classes are principally used to help define the
-structural properties of slots (elements) of model modules and the
-methods that can be applied to these slots. S3 classes created for these
-purposes are called <strong>sub-modules</strong>.</p>
-<div class="card border-primary mb-3" style="max-width: 20rem;">
-<div class="card-header">
-<p><strong>ready4 Concept</strong></p>
-</div>
-<div class="card-body">
-<div id="sub-module" class="section level4 card-title">
-<h4>Sub-Module</h4>
-</div>
-<p>An instance of an informal (S3) class and its associated methods that
-describes, validates and applies algorithms to a slot of a Module.</p>
-</div>
-</div>
-</div>
+<p><code>ready4</code> includes a number of core generic functions which
+describe the main types of method to be implemented by model modules.
+These generics correspond exactly to the “core”, “slot” and “extended”
+commands described in <a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/">another
+article</a>.</p>
+<p>Notably, the <code>ready4</code> package does not associate any core
+or extended methods with the <code>Ready4Module</code> <a href="https://www.ready4-dev.com/docs/tutorials/develop-models/modularity/">template
+module</a>. Instead, model developers need to decide which core and
+extended generics they associate with the modules they derive from the
+<code>Ready4Module</code> template. This decision is typically made when
+authoring the methods associated with model modules.</p>
+<p>Currently, the only methods defined for <code>Ready4Module</code> are
+<a href="https://www.ready4-dev.com/docs/tutorials/use-models/authoring-analyses/commands/">slot-methods</a>.
+By default, these slot methods are inherited by all modules derived from
+the <code>Ready4Module</code> template. These methods can be itemised
+using the <code>get_methods</code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">get_methods</span>()</span></code></pre></div>
+<pre><code>##  [1] &quot;authorSlot&quot;        &quot;characterizeSlot&quot;  &quot;depictSlot&quot;       
+##  [4] &quot;enhanceSlot&quot;       &quot;exhibitSlot&quot;       &quot;ingestSlot&quot;       
+##  [7] &quot;investigateSlot&quot;   &quot;manufactureSlot&quot;   &quot;metamorphoseSlot&quot; 
+## [10] &quot;procureSlot&quot;       &quot;prognosticateSlot&quot; &quot;ratifySlot&quot;       
+## [13] &quot;reckonSlot&quot;        &quot;renewSlot&quot;         &quot;shareSlot&quot;</code></pre>
 </div>
 
 

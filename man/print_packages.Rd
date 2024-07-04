@@ -15,6 +15,7 @@ print_packages(
   reference_var_nm_1L_chr = "Reference",
   scroll_height_1L_chr = character(0),
   scroll_width_1L_chr = character(0),
+  sections_chr = character(0),
   url_stub_1L_chr = "https://ready4-dev.github.io/",
   vignette_var_nm_1L_chr = "Vignettes",
   vignette_url_var_nm_1L_chr = "Vignettes_URLs",
@@ -43,6 +44,8 @@ print_packages(
 
 \item{scroll_width_1L_chr}{Scroll width (a character vector of length one), Default: character(0)}
 
+\item{sections_chr}{Sections (a character vector), Default: character(0)}
+
 \item{url_stub_1L_chr}{Url stub (a character vector of length one), Default: 'https://ready4-dev.github.io/'}
 
 \item{vignette_var_nm_1L_chr}{Vignette variable name (a character vector of length one), Default: 'Vignettes'}
@@ -57,7 +60,7 @@ print_packages(
 Package extensions (a kable)
 }
 \description{
-print_modules() formats the output of either get_modules_tb() or make_modules_tb() as HTML.
+print_packages() formats the output of get_libraries_tb() as HTML.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
