@@ -125,6 +125,9 @@ make_code_releases_tbl <- function (repo_type_1L_chr = c("Framework", "Module", 
         }
         releases_xx <- repos_chr %>% purrr::map_dfr(~get_gracefully(paste0("https://github.com/", 
             org_1L_chr, "/", .x, "/releases.atom"), fn = tidyRSS::tidyfeed))
+        if (nrow(releases_xx) == 0) {
+            releases_xx <- NULL
+        }
         if (!is.null(releases_xx)) {
             releases_xx <- releases_xx %>% dplyr::arrange(dplyr::desc(.data$entry_last_updated)) %>% 
                 dplyr::select("feed_title", "entry_title", "entry_last_updated", 
@@ -204,7 +207,8 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
     type_1L_chr <- match.arg(type_1L_chr)
     if (is.null(dvs_tb)) {
         contents_ls <- get_gracefully(dv_nm_1L_chr, fn = dataverse::dataverse_contents, 
-            args_ls = list(key = key_1L_chr, server = server_1L_chr))
+            args_ls = list(key = key_1L_chr, server = server_1L_chr), 
+            not_chr_1L_lgl = TRUE)
         if (!is.null(contents_ls)) {
             dv_ls <- contents_ls[contents_ls %>% purrr::map_lgl(~.x$type == 
                 "dataverse")]
@@ -215,19 +219,22 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
             }
             else {
                 extra_dv_ls <- get_gracefully(dv_nm_1L_chr, fn = dataverse::get_dataverse, 
-                  args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                  args_ls = list(key = key_1L_chr, server = server_1L_chr), 
+                  not_chr_1L_lgl = TRUE)
                 dv_ls <- append(extra_dv_ls, dv_ls)
             }
             dvs_tb <- dv_ls %>% purrr::map_dfr(~{
                 dv_ls <- get_gracefully(.x, fn = dataverse::get_dataverse, 
-                  args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                  args_ls = list(key = key_1L_chr, server = server_1L_chr), 
+                  not_chr_1L_lgl = TRUE)
                 tb <- tibble::tibble(Dataverse = dv_ls$alias, 
                   Name = dv_ls$name, Description = dv_ls$description, 
                   Creator = dv_ls$affiliation)
                 tb %>% dplyr::mutate(Contents = purrr::map(.data$Dataverse, 
                   ~{
                     dv_all_ls <- get_gracefully(.x, fn = dataverse::dataverse_contents, 
-                      args_ls = list(key = key_1L_chr, server = server_1L_chr))
+                      args_ls = list(key = key_1L_chr, server = server_1L_chr), 
+                      not_chr_1L_lgl = TRUE)
                     dv_all_ls[dv_all_ls %>% purrr::map_lgl(~.x$type == 
                       "dataset")] %>% purrr::map_chr(~if ("persistentUrl" %in% 
                       names(.x)) {
@@ -238,41 +245,46 @@ make_datasets_tb <- function (dv_nm_1L_chr = "ready4", dvs_tb = NULL, filter_cdn
                     })
                   }))
             })
-            dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Contents %>% 
-                purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata(key = key_1L_chr, 
-                  server = server_1L_chr) %>% tryCatch(error = function(e) "ERROR")))) %>% 
-                dplyr::mutate(Contents = .data$Contents %>% purrr::map2(.data$Datasets_Meta, 
-                  ~{
-                    entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
+            if (nrow(dvs_tb) == 0) {
+                dvs_tb <- NULL
+            }
+            else {
+                dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Contents %>% 
+                  purrr::map(~.x %>% purrr::map(~.x %>% dataverse::dataset_metadata(key = key_1L_chr, 
+                    server = server_1L_chr) %>% tryCatch(error = function(e) "ERROR")))) %>% 
+                  dplyr::mutate(Contents = .data$Contents %>% 
+                    purrr::map2(.data$Datasets_Meta, ~{
+                      entry_ls <- .x %>% purrr::map2(.y, ~if (identical(.y, 
+                        "ERROR")) {
+                        NA_character_
+                      }
+                      else {
+                        .x
+                      }) %>% purrr::discard(is.na)
+                      if (identical(entry_ls, list())) {
+                        NA_character_
+                      }
+                      else {
+                        entry_ls %>% purrr::flatten_chr()
+                      }
+                    }))
+                dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Datasets_Meta %>% 
+                  purrr::map(~{
+                    entry_ls <- .x %>% purrr::map(~if (identical(.x, 
                       "ERROR")) {
-                      NA_character_
+                      NULL
                     }
                     else {
                       .x
-                    }) %>% purrr::discard(is.na)
+                    }) %>% purrr::compact()
                     if (identical(entry_ls, list())) {
-                      NA_character_
+                      NULL
                     }
                     else {
-                      entry_ls %>% purrr::flatten_chr()
+                      entry_ls
                     }
-                  }))
-            dvs_tb <- dvs_tb %>% dplyr::mutate(Datasets_Meta = .data$Datasets_Meta %>% 
-                purrr::map(~{
-                  entry_ls <- .x %>% purrr::map(~if (identical(.x, 
-                    "ERROR")) {
-                    NULL
-                  }
-                  else {
-                    .x
-                  }) %>% purrr::compact()
-                  if (identical(entry_ls, list())) {
-                    NULL
-                  }
-                  else {
-                    entry_ls
-                  }
-                })) %>% dplyr::arrange(.data$Dataverse)
+                  })) %>% dplyr::arrange(.data$Dataverse)
+            }
         }
     }
     if (is.null(dvs_tb)) {
@@ -318,7 +330,8 @@ make_ds_releases_tbl <- function (ds_dois_chr, format_1L_chr = "%d-%b-%Y", key_1
 {
     ds_releases_xx <- ds_dois_chr %>% purrr::map_dfr(~{
         meta_ls <- get_gracefully(.x, fn = dataverse::dataset_versions, 
-            args_ls = list(key = key_1L_chr, server = server_1L_chr))
+            args_ls = list(key = key_1L_chr, server = server_1L_chr), 
+            not_chr_1L_lgl = TRUE)
         if (is.null(meta_ls)) {
             NULL
         }
