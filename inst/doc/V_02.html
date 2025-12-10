@@ -284,7 +284,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
 { counter-reset: source-line 0; }
@@ -590,16 +590,15 @@ value supplied to the <code>gh_repo_1L_chr</code> argument specifies the
 repository in which a dataset of readyforwhatsnext module libraries is
 stored.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">get_methods_tb</span>(<span class="at">gh_repo_1L_chr =</span> <span class="st">&quot;ready4-dev/ready4&quot;</span>)</span></code></pre></div>
-<pre><code>## A character string is being returned. If this is not what you expected, it is likely to be the error message produced when the requested online resource has not been found. Set the not_chr_1L_lgl argument to TRUE to force a NULL return value when an internet resource is not found.</code></pre>
 <div id="core-commands" class="section level3">
 <h3>Core commands</h3>
 <p>A HTML table of <code>ready4</code>’s core commands and examples of
 the use of each command can be displayed using the
 <code>print_methods</code> function, using the
 <code>return_1L_chr = &quot;core&quot;</code> argument.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;core&quot;</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;core&quot;</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>) </span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -892,9 +891,9 @@ will be assigned to the specified slot.</p></li>
 <p>A HTML table of slot commands and relevant examples can be displayed
 using the <code>print_methods</code> function, using the
 <code>return_1L_chr = &quot;slot&quot;</code> argument.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;slot&quot;</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;slot&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1109,10 +1108,10 @@ extension specifying the type of output to be authored by the method. A
 HTML table of the extended generics bundled with <code>ready4</code> can
 be displayed using the <code>print_methods</code> function, using the
 <code>return_1L_chr = &quot;extended&quot;</code> argument.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>              <span class="at">exclude_mthds_for_chr =</span> <span class="st">&quot;Ready4Module&quot;</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;extended&quot;</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">print_methods</span>(x,</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>              <span class="at">exclude_mthds_for_chr =</span> <span class="st">&quot;Ready4Module&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>              <span class="at">return_1L_chr =</span> <span class="st">&quot;extended&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>              <span class="at">scroll_width_1L_chr =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <thead>

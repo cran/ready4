@@ -5,8 +5,8 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 library(ready4) 
 
 ## ----echo=FALSE, eval=FALSE---------------------------------------------------
-#  # Not run
-#  # x <- make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
+# # Not run
+# # x <- make_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
 
 ## -----------------------------------------------------------------------------
 x <- get_methods_tb(gh_repo_1L_chr = "ready4-dev/ready4")
